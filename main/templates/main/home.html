@@ -1,0 +1,64 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div >
+    <div style="padding-top: 5px; padding-bottom: 5px;background-color:rgb(219, 128, 23);margin-bottom: 0%;margin-top: 0%;">
+       <a href="#transfer"><button style="color: rgb(219, 128, 23); outline:none; text-decoration-color: black;"   > <h3>Transfer Money</h3></button></a> 
+        
+        <a href="#cd"><button style="color: rgb(219, 128, 23); outline:none; text-decoration-color: black;"   > <h3>Customers Data</h3></button></a> 
+        <a href="#tr"><button style="color: rgb(219, 128, 23); outline: none; text-decoration-color: black"  > <h3>Transfer Record</h3></button></a> 
+    </div>
+    <div style="background: brown;">
+    <div style="margin-bottom: 200px;padding-top: 0%;">
+        <h1 class="names"  style=" " id="transfer">Transfer Money</h1>
+    <div style="padding-left: 40px;padding-top: 40px;">
+                <form method="POST" action="">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit", name="save">Submit</button>
+            </form>
+    </div>
+    </div>
+    <div>
+    <h1 class="names" style=" " id="cd">Customers Data</h1>
+     <div style="padding-left: 40px;">
+    <table style="border: 2px solid black; width: auto; min-width: 720px; " hover> 
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Balance</th>
+        </tr>
+        {% for item in ls %}
+            <tr>
+                <td style="border: 2px solid black;">{{item.name}}</td>
+                <td style="border: 2px solid black;">{{item.email}}</td>
+                <td style="border: 2px solid black;">{{item.balance}}</td>
+            </tr>
+        {% endfor %}
+    </table> 
+    </div>
+    </div>
+
+    <div style="margin-top: 300px;">
+    <h1 class="names" style="" id="tr">Transfer Record</h1>
+    <div style="padding-left: 40px;">
+                
+            <table style="border: 2px solid black;width: auto; min-width: 720px; margin-bottom: 30px;"> 
+                <tr>
+                    <th>From cust</th>
+                    <th>To cust</th>
+                    <th>Amount</th>
+                </tr>
+                {% for item in ts %}
+                    <tr>
+                        <td style="border: 2px solid black;">{{item.fromName}}</td>
+                        <td style="border: 2px solid black;">{{item.toName}}</td>
+                        <td style="border: 2px solid black;">{{item.amount}}</td>
+                    </tr>
+                {% endfor %}
+            </table> 
+    </div>
+    </div>
+    </div>
+    </div>
+    <!-- <button ></button> -->
+{% endblock %}
